@@ -18,7 +18,7 @@ public class NoticiaResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String buscar() {
-		List<Noticia> noticia = new RecuperandoInformacaoController().buscarLinks();
+		List<Noticia> noticia = new RecuperandoInformacaoController().recuperandoTodasNoticias();
 		return new Gson().toJson(noticia);
 	}
 }

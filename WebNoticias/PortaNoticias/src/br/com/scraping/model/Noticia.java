@@ -13,31 +13,38 @@ public class Noticia implements Serializable{
 
 	private static final long serialVersionUID = 9203790109988278580L;
 
+	private int	id;
 	private String canalAbertura;
 	private String titulo;
 	private String link;
 	private String hora;
-	private List<String> listadeNoticias;
 
-	
 	public Noticia() {
 
 	}
 	
-	public Noticia(final String canalAbertura, String titulo, String link, String hora, List<String> listadeNoticias) {
+	public Noticia(int id, String canalAbertura, String titulo, String link, String hora) {
 		super();
+		this.id = id;
 		this.canalAbertura = canalAbertura;
 		this.titulo = titulo;
 		this.link = link;
 		this.hora = hora;
-		this.listadeNoticias = listadeNoticias;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCanalAbertura() {
 		return canalAbertura;
 	}
 
-	public void setCanalAbertura(final String canalAbertura) {
+	public void setCanalAbertura(String canalAbertura) {
 		this.canalAbertura = canalAbertura;
 	}
 
@@ -60,30 +67,34 @@ public class Noticia implements Serializable{
 	public String getHora() {
 		return hora;
 	}
-	
+
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
 
-	public List<String> getListadeNoticias() {
-		return listadeNoticias;
+	@Override
+	public String toString() {
+		return "Canais de abetura : " + canalAbertura + 
+				"\n"+
+				"Titulos : " + titulo + 
+				"\n"+
+				"Links : " + link +
+				"\n"+
+				"Hora : " + hora;
 	}
 
-	public void setListadeNoticias(List<String> listadeNoticias) {
-		this.listadeNoticias = listadeNoticias;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((canalAbertura == null) ? 0 : canalAbertura.hashCode());
 		result = prime * result + ((hora == null) ? 0 : hora.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((link == null) ? 0 : link.hashCode());
-		result = prime * result + ((listadeNoticias == null) ? 0 : listadeNoticias.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -104,15 +115,12 @@ public class Noticia implements Serializable{
 				return false;
 		} else if (!hora.equals(other.hora))
 			return false;
+		if (id != other.id)
+			return false;
 		if (link == null) {
 			if (other.link != null)
 				return false;
 		} else if (!link.equals(other.link))
-			return false;
-		if (listadeNoticias == null) {
-			if (other.listadeNoticias != null)
-				return false;
-		} else if (!listadeNoticias.equals(other.listadeNoticias))
 			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
@@ -120,21 +128,6 @@ public class Noticia implements Serializable{
 		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Canais de abetura : " + canalAbertura + 
-				"\n"+
-				"Titulos : " + titulo + 
-				"\n"+
-				"Links : " + link +
-				"\n"+
-				"Hora : " + hora;
-	}
-
-	public String toJSON() {
-		return new Gson().toJson(this);
 	}
 
 }

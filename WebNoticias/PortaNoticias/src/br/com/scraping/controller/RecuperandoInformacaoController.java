@@ -10,13 +10,14 @@ import org.jsoup.select.Elements;
 
 import br.com.scraping.model.Noticia;
 
+
 public class RecuperandoInformacaoController {
 
 	private static String URL = "https://noticias.uol.com.br/ultimas/index.htm";
 	ArrayList<Noticia> listaNoticias = new ArrayList<Noticia>();
 
-	public List<Noticia> buscarLinks() {
-		Noticia noticias = null;
+
+	public List<Noticia> recuperandoTodasNoticias() {
 		Document document = null;
 		try {
 			document = Jsoup.connect(URL).userAgent("Jsoup").get();
@@ -28,16 +29,20 @@ public class RecuperandoInformacaoController {
 
 		Elements e = document.getElementsByClass("thumbnail-standard");
 
-		noticias = new Noticia();
-
+		int i = 0;
 		for(Element es : e) {
-			noticias.setCanalAbertura(es.firstElementSibling().select(".thumb-kicker").text());
-			noticias.setTitulo(es.firstElementSibling().select(".thumb-title").text().replace(",", " "));
-			noticias.setLink(es.firstElementSibling().select("a").attr("href"));
-			noticias.setHora(es.firstElementSibling().select("time").first().text());
+			
+			Noticia noticias = new Noticia();
+			
+			noticias.setId(i);
+			noticias.setCanalAbertura(es.select(".thumb-kicker").text());
+			noticias.setTitulo(es.select(".thumb-title").text().replace(",", " "));
+			noticias.setLink(es.select("a").attr("href"));
+			noticias.setHora(es.select("time").first().text());
+			listaNoticias.add(noticias);
+			i++;
 		}
-
-		listaNoticias.add(noticias);
+	
 		return listaNoticias;
 	}
 
