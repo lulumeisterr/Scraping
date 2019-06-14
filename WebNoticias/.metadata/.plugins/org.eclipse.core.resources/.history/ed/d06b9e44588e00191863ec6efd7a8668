@@ -1,0 +1,61 @@
+package br.com.scraping.controller;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import br.com.scraping.model.Noticia;
+import br.com.scraping.vo.NoticiaVO;
+
+public class RecuperandoInformacaoController {
+	
+	public static void main(String[] args) {
+		buscarLinks();
+	}
+	private static String URL = "https://noticias.uol.com.br/ultimas/index.htm";
+
+	
+	static ArrayList<NoticiaVO> listaNoticiasVO = new ArrayList<NoticiaVO>();
+	static ArrayList<Noticia> listaNoticias = new ArrayList<Noticia>();
+	
+	public static List<Noticia> buscarLinks() {
+		Noticia noticias = null;
+		Document document = null;
+		try {
+			document = Jsoup.connect(URL).userAgent("Jsoup").get();
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro na URL");
+			return null;
+		}
+
+		Elements e = document.getElementsByClass("thumbnail-standard");
+		ArrayList<Noticia> objetos = new ArrayList<Noticia>();
+	
+		NoticiaVO noticiaVO = new NoticiaVO();
+	
+		for(Element es : e) {
+			noticiaVO.setCanalAbertura(es.select(".thumb-kicker").text());
+			noticiaVO.setTitulo(es.select(".thumb-title").text().replace(",", " "));
+			noticiaVO.setLink(es.select("a").attr("href"));
+			noticiaVO.setHora(es.select("time").first().text());
+			
+			listaNoticiasVO.add(noticiaVO);
+		}
+		
+		for(NoticiaVO nt : Arrays.asList(noticiaVO)) {
+			noticias = new Noticia();
+				noticias.setCanalAbertura(noticiaVO.getCanalAbertura());
+			listaNoticias.add(noticias);
+		}
+		
+
+		return listaNoticias;
+	}
+
+}

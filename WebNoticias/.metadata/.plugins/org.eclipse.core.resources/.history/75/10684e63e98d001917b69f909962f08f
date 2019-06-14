@@ -1,0 +1,5 @@
+package br.com.scraping.enm;
+
+public enum CanalNoticias {
+
+}

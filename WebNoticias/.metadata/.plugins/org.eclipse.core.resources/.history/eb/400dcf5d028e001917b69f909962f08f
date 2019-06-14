@@ -1,0 +1,84 @@
+package br.com.scraping.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Noticia implements Serializable{
+
+	private static final long serialVersionUID = 9203790109988278580L;
+
+	private List<String> canalAbertura;
+	private List<String> titulo;
+	private List<String> link;
+	private List<String> hora;
+
+	public Noticia() {
+
+	}
+	
+	public Noticia(List<String> canalAbertura, List<String> titulo, List<String> link, List<String> hora) {
+		super();
+		this.canalAbertura = canalAbertura;
+		this.titulo = titulo;
+		this.link = link;
+		this.hora = hora;
+	}
+
+	public List<String> getCanalAbertura() {
+		return canalAbertura;
+	}
+
+	public void setCanalAbertura(List<String> canalAbertura) {
+		this.canalAbertura = canalAbertura;
+	}
+
+	public List<String> getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(List<String> titulo) {
+		this.titulo = titulo;
+	}
+
+	public List<String> getLink() {
+		return link;
+	}
+
+	public void setLink(List<String> link) {
+		this.link = link;
+	}
+
+	public List<String> getHora() {
+		return hora;
+	}
+
+	public void setHora(List<String> hora) {
+		this.hora = hora;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((canalAbertura == null) ? 0 : canalAbertura.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Noticia other = (Noticia) obj;
+		if (canalAbertura == null) {
+			if (other.canalAbertura != null)
+				return false;
+		} else if (!canalAbertura.equals(other.canalAbertura))
+			return false;
+		return true;
+	}
+
+}

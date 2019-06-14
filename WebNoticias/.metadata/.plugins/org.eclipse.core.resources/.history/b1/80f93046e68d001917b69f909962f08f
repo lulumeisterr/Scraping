@@ -1,0 +1,75 @@
+package br.com.scraping.model;
+
+import java.io.Serializable;
+
+public class Noticia implements Serializable{
+	
+	
+	
+	private String canaldeAcesso;
+	private String titulo;
+	private String descricao;
+	private String link;
+	
+	public Noticia() {
+		
+	}
+	
+	public Noticia(String canaldeAcesso, String titulo, String descricao, String link) {
+		super();
+		this.canaldeAcesso = canaldeAcesso;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.link = link;
+	}
+	public String getCanaldeAcesso() {
+		return canaldeAcesso;
+	}
+	public void setCanaldeAcesso(String canaldeAcesso) {
+		this.canaldeAcesso = canaldeAcesso;
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Noticia other = (Noticia) obj;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
+	}
+	
+}

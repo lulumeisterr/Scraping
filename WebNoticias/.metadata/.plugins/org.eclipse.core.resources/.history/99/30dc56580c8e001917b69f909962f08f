@@ -1,0 +1,24 @@
+package br.com.scraping.resources;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import br.com.scraping.controller.RecuperandoInformacaoController;
+import br.com.scraping.model.Noticia;
+
+@Path("noticias")
+public class NoticiaResource {
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscar() {
+		Noticia noticia = new RecuperandoInformacaoController().buscarLinks();
+		return Response.ok(noticia).build();
+	}
+
+
+	
+}
